@@ -1,0 +1,42 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fossil}
+      POSTGRES_USER: ${POSTGRES_USER:-fossil}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - fossil_pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fossil} -d ${POSTGRES_DB:-fossil}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: ..
+      dockerfile: self-hosted/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-fossil}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-fossil}
+      FOSSIL_HOST: ${FOSSIL_HOST:-0.0.0.0}
+      FOSSIL_PORT: ${FOSSIL_PORT:-8745}
+      EMBEDDING_BACKEND: ${EMBEDDING_BACKEND:-local}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-all-MiniLM-L6-v2}
+    ports:
+      - "${FOSSIL_PORT:-8745}:8745"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8745/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  fossil_pgdata:
