@@ -100,12 +100,21 @@ class Fossil:
         top_k: int = 5,
         min_score: float = 0.5,
         domain: Optional[TaskDomain] = None,
+        pool: Optional[str] = None,
     ) -> List[Tuple[FossilRecord, float]]:
+        if isinstance(self._store, FossilStore):
+            return self._store.search(
+                situation_text=situation,
+                top_k=top_k,
+                min_score=min_score,
+                domain=domain.value if domain else None,
+            )
         return self._store.search(
             situation_text=situation,
             top_k=top_k,
             min_score=min_score,
             domain=domain.value if domain else None,
+            pool=pool,
         )
 
     def get(self, fossil_id: str) -> Optional[FossilRecord]:

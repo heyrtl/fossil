@@ -51,14 +51,24 @@ export async function searchFossils(
   queryEmbedding: number[],
   topK: number,
   minScore: number,
-  domain?: string
+  domain?: string,
+  pool?: string
 ): Promise<SearchResult[]> {
-  let query = "SELECT * FROM fossils";
+  const conditions: string[] = [];
   const bindings: unknown[] = [];
 
   if (domain) {
-    query += " WHERE task_domain = ?";
+    conditions.push("task_domain = ?");
     bindings.push(domain);
+  }
+
+  if (pool === "community") {
+    conditions.push("shared = 1");
+  }
+
+  let query = "SELECT * FROM fossils";
+  if (conditions.length > 0) {
+    query += " WHERE " + conditions.join(" AND ");
   }
 
   const { results } = await db

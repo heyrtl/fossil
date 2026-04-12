@@ -32,9 +32,7 @@ class RemoteStore:
     ) -> dict | list:
         url = f"{self._base}{path}"
         data = json.dumps(body).encode() if body is not None else None
-        headers = {"User-Agent": "openfossil-sdk/0.1.2"}
-        if data:
-            headers["Content-Type"] = "application/json"
+        headers = {"Content-Type": "application/json"} if data else {}
         req = Request(url, data=data, headers=headers, method=method)
         try:
             with urlopen(req) as resp:
@@ -53,10 +51,13 @@ class RemoteStore:
         top_k: int = 5,
         min_score: float = 0.5,
         domain: Optional[str] = None,
+        pool: Optional[str] = None,
     ) -> List[Tuple[FossilRecord, float]]:
         params: dict = {"q": situation_text, "top_k": top_k, "min_score": min_score}
         if domain:
             params["domain"] = domain
+        if pool:
+            params["pool"] = pool
         path = f"/search?{urlencode(params)}"
         results = self._request(path)
         return [

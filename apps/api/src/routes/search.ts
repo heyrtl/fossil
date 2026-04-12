@@ -12,9 +12,10 @@ search.get("/", async (c) => {
   const topK = Math.min(parseInt(c.req.query("top_k") ?? "5"), 20);
   const minScore = parseFloat(c.req.query("min_score") ?? "0.5");
   const domain = c.req.query("domain") ?? undefined;
+  const pool = c.req.query("pool") ?? undefined;
 
   const queryEmbedding = await embed(c.env.AI, q);
-  const results = await searchFossils(c.env.DB, queryEmbedding, topK, minScore, domain);
+  const results = await searchFossils(c.env.DB, queryEmbedding, topK, minScore, domain, pool);
 
   return c.json(results);
 });
