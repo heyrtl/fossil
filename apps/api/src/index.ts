@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { records } from "./routes/records";
 import { search } from "./routes/search";
+import { stats } from "./routes/stats";
 
 export type Bindings = {
   DB: D1Database;
@@ -18,6 +19,7 @@ app.get("/health", (c) =>
 
 app.route("/records", records);
 app.route("/search", search);
+app.route("/stats", stats);
 
 app.notFound((c) => c.json({ error: "not found" }, 404));
 app.onError((err, c) => {

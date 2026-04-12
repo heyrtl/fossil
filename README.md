@@ -2,6 +2,8 @@
 
 **Semantic failure memory for AI agents.**
 
+> 🦴 [Community pool stats](https://fossil-api.hello-76a.workers.dev/stats) — growing with every shared fossil.
+
 ![FOSSIL demo](./demo.gif)
 
 Every AI agent is born knowing nothing.

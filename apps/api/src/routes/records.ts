@@ -28,6 +28,10 @@ records.post("/", async (c) => {
     record = buildRecord(body);
   }
 
+  if (record.shared && record.situation.context_snapshot) {
+    record.situation.context_snapshot = null;
+  }
+
   const situationText = `${record.situation.description} | ${record.failure.description}`;
   const embedding = await embed(c.env.AI, situationText);
   await insertFossil(c.env.DB, record, embedding);
