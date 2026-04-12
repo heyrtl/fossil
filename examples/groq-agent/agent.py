@@ -16,6 +16,9 @@ Setup:
 
 from __future__ import annotations
 import os
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["TQDM_DISABLE"] = "1"
 import json
 import sys
 from pathlib import Path
@@ -139,10 +142,9 @@ Always include all fields even if empty string.
     response = client.chat.completions.create(
         model=GROQ_MODEL,
         messages=messages,
-        tools=tools if tools else None,
-        tool_choice="auto" if tools else None,
         temperature=0.1,
         max_tokens=1024,
+        **({"tools": tools, "tool_choice": "auto"} if tools else {}),
     )
 
     msg = response.choices[0].message

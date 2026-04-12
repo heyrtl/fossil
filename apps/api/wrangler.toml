@@ -1,0 +1,15 @@
+name = "fossil-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fossil"
+database_id = "6d18da1d-7c8a-473a-8aba-5745f603f446"
+
+[ai]
+binding = "AI"
+
+[observability]
+enabled = true

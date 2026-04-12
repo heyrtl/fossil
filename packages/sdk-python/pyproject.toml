@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "fossil-sdk"
-version = "0.1.0"
+name = "openfossil"
+version = "0.1.1"
 description = "Semantic failure memory for AI agents"
 readme = "README.md"
 requires-python = ">=3.10"

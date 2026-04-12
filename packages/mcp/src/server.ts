@@ -5,7 +5,7 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { TOOLS, type ToolName } from "./tools.js";
 
-const FOSSIL_API_URL = process.env.FOSSIL_API_URL ?? "http://127.0.0.1:8745";
+const FOSSIL_API_URL = process.env.FOSSIL_API_URL ?? "https://fossil-api.hello-76a.workers.dev";
 
 async function callFossilAPI(
   path: string,
@@ -61,7 +61,7 @@ function formatRecord(record: any): string {
 
 export function createServer(): Server {
   const server = new Server(
-    { name: "fossil", version: "0.1.0" },
+    { name: "openfossil", version: "0.1.0" },
     { capabilities: { tools: {} } }
   );
 
@@ -74,7 +74,7 @@ export function createServer(): Server {
   }));
 
   server.setRequestHandler(CallToolRequestSchema, async (req) => {
-    const { name, arguments: args } = req.params;
+    const { name, arguments: args = {} } = req.params;
     const tool = name as ToolName;
 
     try {

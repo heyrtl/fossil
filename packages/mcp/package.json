@@ -1,10 +1,10 @@
 {
-  "name": "@fossil/mcp",
-  "version": "0.1.0",
+  "name": "@openfossil/mcp",
+  "version": "0.1.1",
   "description": "FOSSIL MCP server — semantic failure memory for AI agents",
   "type": "module",
   "bin": {
-    "fossil-mcp": "./dist/index.js"
+    "openfossil-mcp": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "scripts": {
@@ -13,10 +13,10 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
-    "@fossil/core": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
     "typescript": "^5.4.0"
   },
   "files": ["dist"],

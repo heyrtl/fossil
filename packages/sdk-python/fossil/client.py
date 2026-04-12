@@ -14,39 +14,39 @@ from .schema import (
     TaskDomain,
 )
 from .store import FossilStore, DEFAULT_DB_PATH
+from .remote import RemoteStore
 from .embedder import BaseEmbedder
+
+AnyStore = FossilStore | RemoteStore
 
 
 class Fossil:
     """
     Primary interface for FOSSIL.
 
-    Usage:
+    Local SQLite (default):
         fossil = Fossil()
 
-        fossil.record(
-            situation="agent was extracting structured data from a PDF invoice",
-            failure_type=FailureType.FORMAT_FAILURE,
-            failure="output JSON had string where int expected in 'total' field",
-            severity=Severity.MAJOR,
-            resolution_type=ResolutionType.SCHEMA_CORRECTION,
-            resolution="added explicit type coercion instruction to extraction prompt",
-            framework="langchain",
-            model="llama-3.3-70b",
-            domain=TaskDomain.DATA_ANALYSIS,
-        )
+    Remote API:
+        fossil = Fossil(api_url="https://fossil-api.hello-76a.workers.dev")
 
-        results = fossil.search("extracting numbers from PDF documents")
-        for record, score in results:
-            print(score, record.resolution.description)
+    Custom store:
+        fossil = Fossil(store=RemoteStore("https://..."))
     """
 
     def __init__(
         self,
         db_path: Path | str = DEFAULT_DB_PATH,
         embedder: Optional[BaseEmbedder] = None,
+        api_url: Optional[str] = None,
+        store: Optional[AnyStore] = None,
     ):
-        self._store = FossilStore(db_path=db_path, embedder=embedder)
+        if store is not None:
+            self._store = store
+        elif api_url is not None:
+            self._store = RemoteStore(api_url)
+        else:
+            self._store = FossilStore(db_path=db_path, embedder=embedder)
 
     def record(
         self,

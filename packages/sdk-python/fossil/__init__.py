@@ -1,4 +1,5 @@
 from .client import Fossil
+from .remote import RemoteStore
 from .schema import (
     AgentMeta,
     Failure,
@@ -15,6 +16,7 @@ from .utils import format_for_injection, format_summary, truncate_context
 
 __all__ = [
     "Fossil",
+    "RemoteStore",
     "FossilRecord",
     "AgentMeta",
     "Situation",

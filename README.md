@@ -2,6 +2,8 @@
 
 **Semantic failure memory for AI agents.**
 
+![FOSSIL demo](./demo.gif)
+
 Every AI agent is born knowing nothing.
 
 It fails. You fix it. Next week, someone else's agent fails the exact same way.
