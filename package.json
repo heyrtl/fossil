@@ -1,10 +1,9 @@
 {
-  "name": "fossil",
+  "name": "openfossil",
   "private": true,
   "workspaces": [
     "packages/core",
-    "packages/mcp",
-    "apps/api"
+    "packages/mcp"
   ],
   "scripts": {
     "build": "npm run build --workspaces",

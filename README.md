@@ -51,7 +51,7 @@ context = format_for_injection(results)
 ## Install
 
 ```bash
-pip install fossil-sdk[local]
+pip install openfossil[local]
 ```
 
 `[local]` pulls in `sentence-transformers` for on-device embeddings.
@@ -61,10 +61,10 @@ No API key. No data leaves your machine.
 
 ## MCP server
 
-For Claude Desktop, Cursor, and any MCP-compatible client:
+For Claude Code, Codex CLI, Cursor, and any MCP-compatible client:
 
 ```bash
-npx @fossil/mcp
+npx @openfossil/mcp
 ```
 
 Then add to your MCP config:
@@ -74,13 +74,16 @@ Then add to your MCP config:
   "mcpServers": {
     "fossil": {
       "command": "npx",
-      "args": ["@fossil/mcp"]
+      "args": ["@openfossil/mcp"],
+      "env": {
+        "FOSSIL_API_URL": "https://fossil-api.hello-76a.workers.dev"
+      }
     }
   }
 }
 ```
 
-Claude and Cursor can now call `fossil_search` before any agent step and `fossil_record` after any failure — with no code changes to your agent.
+Claude Code and Cursor can now call `fossil_search` before any agent step and `fossil_record` after any failure — with no code changes to your agent.
 
 ---
 
@@ -106,17 +109,17 @@ The difference is semantic search over structured failure records, not keyword s
 git clone https://github.com/heyrtl/fossil
 cd fossil/self-hosted
 cp .env.example .env  # set POSTGRES_PASSWORD
-docker compose up -d
+docker compose up db -d
 ```
 
-Runs PostgreSQL with pgvector. Point the SDK at it:
+Runs PostgreSQL with pgvector. Point the SDK at your own deployed API:
 
 ```python
-fossil = Fossil(db_path="postgresql://fossil:password@localhost:5432/fossil")
+fossil = Fossil(api_url="http://your-server:8745")
 ```
 
 The default SQLite store is fine for local and single-developer use.
-Switch to the self-hosted stack when you want a team-shared pool or the community sync.
+Switch to self-hosted when you want a team-shared pool.
 
 ---
 
@@ -136,13 +139,18 @@ Each type implies a class of resolutions. See [FOSSIL.md](./FOSSIL.md) for the f
 
 ```
 packages/
-  sdk-python/   — pip install fossil-sdk
-  core/         — TypeScript types (@fossil/core)
-  mcp/          — MCP server (@fossil/mcp)
+  sdk-python/   — pip install openfossil
+  core/         — TypeScript types (@openfossil/core)
+  mcp/          — MCP server (@openfossil/mcp)
+apps/
+  api/          — REST API (Cloudflare Workers + D1 + Workers AI)
 examples/
   groq-agent/   — full working demo on Groq free tier
 schema/
   fossil.v1.json — JSON Schema for the protocol
+skills/
+  openclaw/     — OpenClaw ClawHub skill
+docs/           — full documentation
 self-hosted/
   docker-compose.yml
 FOSSIL.md       — protocol specification
@@ -153,9 +161,9 @@ FOSSIL.md       — protocol specification
 ## Status
 
 FOSSIL is in early development. The protocol is v1.0 and stable.
-The Python SDK and MCP server are functional and used in production.
+The Python SDK, MCP server, and REST API are live and functional.
 
-Community pool coming in a future release.
+Live community API: `https://fossil-api.hello-76a.workers.dev` — no API key required.
 
 ---
 

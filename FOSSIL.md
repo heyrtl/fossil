@@ -112,7 +112,7 @@ The taxonomy is the intellectual core of the protocol. These categories were des
 
 FOSSIL embeds the concatenation of `situation.description` and `failure.description` for each record. Embeddings are stored alongside the record and used for cosine similarity search at query time.
 
-The embedding model is pluggable. The reference implementation defaults to `all-MiniLM-L6-v2` via `sentence-transformers` — no API key, no data egress, runs on CPU.
+The embedding model is pluggable. The Python SDK defaults to `all-MiniLM-L6-v2` via `sentence-transformers` — no API key, no data egress, runs on CPU. The REST API uses `bge-small-en-v1.5` via Cloudflare Workers AI.
 
 Embeddings are **never** included in exported records. They are implementation details of the store.
 
@@ -140,9 +140,9 @@ FOSSIL never embeds or transmits records marked `shared: false`.
 
 | Language | Package | Status |
 |---|---|---|
-| Python | `fossil-sdk` | v0.1.0 |
-| TypeScript (types) | `@fossil/core` | v0.1.0 |
-| MCP server | `@fossil/mcp` | v0.1.0 |
+| Python | `openfossil` | v0.1.4 |
+| TypeScript (types) | `@openfossil/core` | v0.1.0 |
+| MCP server | `@openfossil/mcp` | v0.1.1 |
 
 ---
 
