@@ -1,0 +1,31 @@
+{
+  "name": "@openfossil/sdk",
+  "version": "0.1.0",
+  "description": "JavaScript/TypeScript SDK for FOSSIL — semantic failure memory for AI agents",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@openfossil/core": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  },
+  "files": ["dist"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heyrtl/fossil"
+  },
+  "keywords": ["ai", "agents", "llm", "memory", "observability", "mcp"]
+}
