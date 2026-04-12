@@ -1,45 +1,58 @@
 ---
 name: fossil
-version: 0.1.0
 description: >
   Semantic failure memory for AI agents. Search past reasoning failures before
   acting to avoid known mistakes. Record new failures and resolutions after they
-  happen. Powered by FOSSIL — the open-source failure memory protocol.
-author: heyrtl
-license: MIT
-mcp:
-  server: npx @openfossil/mcp
-  env:
-    FOSSIL_API_URL: https://fossil-api.hello-76a.workers.dev
-triggers:
-  - search fossil
-  - fossil search
-  - record failure to fossil
-  - fossil record
-  - check past failures
-  - what failures have we seen
-  - have we hit this before
-  - remember this failure
-tags:
-  - memory
-  - agents
-  - observability
-  - debugging
-  - mcp
+  happen. Powered by FOSSIL — the open-source failure memory protocol for agents.
+version: 0.1.0
+metadata:
+  openclaw:
+    emoji: "🦴"
+    homepage: https://github.com/heyrtl/fossil
+    install:
+      - kind: node
+        package: "@openfossil/mcp"
+        bins: [openfossil-mcp]
 ---
 
 # FOSSIL — Semantic Failure Memory
 
-FOSSIL gives you a memory for AI agent reasoning failures. Before acting, search
-for similar past failures. After a failure, record it with the resolution so you
-never hit it twice.
+FOSSIL gives your agent a memory for reasoning failures.
 
-The community pool at `fossil-api.hello-76a.workers.dev` is live and free.
-No API key required.
+Before acting, search for similar past failures. After a failure, record it with
+the resolution so you never hit the same mistake twice.
+
+The community API at `fossil-api.hello-76a.workers.dev` is live and free.
+No API key required. Embeddings run on Cloudflare Workers AI.
 
 ---
 
-## Tools available
+## Setup
+
+Add to your `openclaw.json`:
+
+```json
+{
+  "mcp": {
+    "servers": [
+      {
+        "name": "fossil",
+        "command": "npx",
+        "args": ["@openfossil/mcp"],
+        "env": {
+          "FOSSIL_API_URL": "https://fossil-api.hello-76a.workers.dev"
+        }
+      }
+    ]
+  }
+}
+```
+
+Restart your gateway. FOSSIL tools are now available.
+
+---
+
+## Tools
 
 | Tool | When to use |
 |---|---|
@@ -59,40 +72,29 @@ Call `fossil_search` before any step involving:
 - Multi-step file operations
 - Browser automation
 - Sending messages or emails on behalf of the user
-- Any task that has failed before in this workspace
+- Any task domain that has failed before in this workspace
 
 Pass a natural language description of what you are about to attempt.
 Read the returned resolutions before proceeding.
 
-Example:
 ```
-fossil_search("agent about to extract JSON fields from an invoice document")
+fossil_search("extracting JSON fields from an invoice document")
 ```
 
 ---
 
 ## When to record
 
-Call `fossil_record` after any failure, before retrying. Required fields:
+Call `fossil_record` after any failure, before retrying.
 
-- `situation` — what were you attempting (natural language)
-- `failure_type` — see taxonomy below
-- `failure` — what went wrong
-- `severity` — critical | major | minor
-- `resolution_type` — see taxonomy below
-- `resolution` — what fixed it
-- `framework` — openclaw
-- `model` — your configured model name
-
-Example:
 ```
 fossil_record(
   situation="sending a reply email to insurance company",
   failure_type="misinterpretation",
-  failure="agent replied to the wrong thread — matched subject line instead of sender",
+  failure="agent replied to wrong thread — matched subject line not sender",
   severity="major",
   resolution_type="prompt_change",
-  resolution="added explicit instruction: always match by sender address, not subject line",
+  resolution="added: always match by sender address, not subject line",
   framework="openclaw",
   model="claude-opus-4-5"
 )
@@ -100,14 +102,12 @@ fossil_record(
 
 ---
 
-## Failure type taxonomy
-
-Choose the type that best describes the reasoning failure:
+## Failure types
 
 | Type | When to use |
 |---|---|
 | `misinterpretation` | Misread the task or user intent |
-| `hallucinated_tool` | Called a tool that doesn't exist or with wrong signature |
+| `hallucinated_tool` | Called a tool that doesn't exist or wrong signature |
 | `format_failure` | Output didn't match expected schema or format |
 | `context_loss` | Forgot earlier context in a multi-step run |
 | `infinite_loop` | Got stuck in a reasoning or tool-call cycle |
@@ -120,7 +120,7 @@ Choose the type that best describes the reasoning failure:
 
 ---
 
-## Resolution type taxonomy
+## Resolution types
 
 | Type | When to use |
 |---|---|
@@ -135,9 +135,7 @@ Choose the type that best describes the reasoning failure:
 
 ---
 
-## Standing instructions for AGENTS.md
-
-Add this block to your `AGENTS.md` to make FOSSIL a persistent habit:
+## Add to AGENTS.md
 
 ```markdown
 ## Failure Memory (FOSSIL)
@@ -173,7 +171,7 @@ This builds a persistent failure memory across all sessions.
 ## Resources
 
 - Docs: https://github.com/heyrtl/fossil/tree/main/docs
-- Protocol spec: https://github.com/heyrtl/fossil/blob/main/FOSSIL.md
+- Protocol: https://github.com/heyrtl/fossil/blob/main/FOSSIL.md
 - REST API: https://fossil-api.hello-76a.workers.dev/health
-- Python SDK: pip install openfossil
+- Python SDK: `pip install openfossil`
 - Source: https://github.com/heyrtl/fossil
