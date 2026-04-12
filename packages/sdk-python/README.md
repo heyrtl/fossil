@@ -1,18 +1,18 @@
-# fossil-sdk
+# openfossil
 
 Python SDK for FOSSIL — semantic failure memory for AI agents.
 
 ## Install
 
 ```bash
-# core (no embedder — bring your own)
-pip install fossil-sdk
-
 # with local embedder (recommended, no API key needed)
-pip install fossil-sdk[local]
+pip install openfossil[local]
+
+# core only — bring your own embedder or use remote API
+pip install openfossil
 
 # with OpenAI embedder
-pip install fossil-sdk[openai]
+pip install openfossil[openai]
 ```
 
 ## Quickstart
@@ -20,7 +20,11 @@ pip install fossil-sdk[openai]
 ```python
 from fossil import Fossil, FailureType, ResolutionType, Severity, TaskDomain
 
-fossil = Fossil()  # stores in ~/.fossil/fossil.db by default
+# local SQLite store — zero config
+fossil = Fossil()
+
+# point at the live community API
+fossil = Fossil(api_url="https://fossil-api.hello-76a.workers.dev")
 
 # record a failure after it happens
 fossil.record(
@@ -42,6 +46,25 @@ for record, score in results:
     print(f"{score:.2f} — {record.resolution.description}")
 ```
 
+## CLI
+
+```bash
+# record a failure interactively
+fossil record
+
+# search for similar past failures
+fossil search "JSON parsing failure"
+
+# search against the live API
+fossil search "JSON parsing failure" --api-url https://fossil-api.hello-76a.workers.dev
+
+# list recent fossils
+fossil list
+
+# check connection
+fossil ping
+```
+
 ## Inject into agent context
 
 ```python
@@ -52,13 +75,24 @@ fossil = Fossil()
 def run_step(task: str, system_prompt: str) -> str:
     results = fossil.search(task, top_k=3, min_score=0.5)
     fossil_context = format_for_injection(results)
-
     augmented_prompt = system_prompt + "\n\n" + fossil_context
     # pass augmented_prompt to your LLM call
     ...
 ```
 
 `format_for_injection` returns a string you drop directly into any system prompt or context window. No framework lock-in.
+
+## Remote store
+
+```python
+from fossil import Fossil
+
+fossil = Fossil(api_url="https://fossil-api.hello-76a.workers.dev")
+fossil.record(...)
+results = fossil.search(...)
+```
+
+No local embedder needed when using the remote store — embeddings run on the API side.
 
 ## Custom embedder
 
@@ -84,7 +118,7 @@ with Fossil() as fossil:
     results = fossil.search(...)
 ```
 
-## API
+## SDK API
 
 | Method | Description |
 |---|---|

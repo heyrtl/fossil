@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "openfossil"
-version = "0.1.1"
+version = "0.1.4"
 description = "Semantic failure memory for AI agents"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -21,6 +21,7 @@ classifiers = [
 
 dependencies = [
     "numpy>=1.26.0",
+    "click>=8.0.0",
 ]
 
 [project.optional-dependencies]
@@ -35,6 +36,9 @@ dev = [
     "pytest-cov>=5.0.0",
     "ruff>=0.4.0",
 ]
+
+[project.scripts]
+fossil = "fossil.cli:cli"
 
 [project.urls]
 Homepage = "https://github.com/heyrtl/fossil"

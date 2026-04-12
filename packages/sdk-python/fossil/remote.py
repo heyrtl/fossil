@@ -32,7 +32,9 @@ class RemoteStore:
     ) -> dict | list:
         url = f"{self._base}{path}"
         data = json.dumps(body).encode() if body is not None else None
-        headers = {"Content-Type": "application/json"} if data else {}
+        headers = {"User-Agent": "openfossil-sdk/0.1.2"}
+        if data:
+            headers["Content-Type"] = "application/json"
         req = Request(url, data=data, headers=headers, method=method)
         try:
             with urlopen(req) as resp:
