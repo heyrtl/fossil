@@ -17,6 +17,11 @@ pip-wheel-metadata/
 htmlcov/
 .coverage
 
+.wrangler/
+*.cast
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
 # Node
 node_modules/
 dist/
