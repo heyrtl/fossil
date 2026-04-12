@@ -64,7 +64,14 @@ class Fossil:
         verified: bool = False,
         time_to_resolve_minutes: Optional[int] = None,
         shared: bool = False,
-    ) -> FossilRecord:
+) -> FossilRecord:
+        if shared and context_snapshot:
+            import warnings
+            warnings.warn(
+                "context_snapshot will be shared publicly. Ensure it contains no secrets, credentials, or PII before sharing.",
+                stacklevel=2,
+            )
+
         record = FossilRecord(
             agent=AgentMeta(
                 framework=framework,

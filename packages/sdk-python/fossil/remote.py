@@ -7,7 +7,13 @@ import json
 
 from .schema import FossilRecord
 
+from importlib.metadata import version as pkg_version
 
+def _get_user_agent() -> str:
+    try:
+        return f"openfossil-sdk/{pkg_version('openfossil')}"
+    except Exception:
+        return "openfossil-sdk"
 class RemoteStore:
     """
     Talks to a running FOSSIL REST API instead of local SQLite.
@@ -32,7 +38,9 @@ class RemoteStore:
     ) -> dict | list:
         url = f"{self._base}{path}"
         data = json.dumps(body).encode() if body is not None else None
-        headers = {"Content-Type": "application/json"} if data else {}
+        headers = {"User-Agent": _get_user_agent()}
+        if data:
+            headers["Content-Type"] = "application/json"
         req = Request(url, data=data, headers=headers, method=method)
         try:
             with urlopen(req) as resp:

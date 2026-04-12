@@ -28,6 +28,24 @@ def get_fossil(api_url: Optional[str], db: Optional[str]) -> Fossil:
         return Fossil(store=RemoteStore(url))
     return Fossil(db_path=db or DEFAULT_DB)
 
+def _splash() -> None:
+    from importlib.metadata import version as pkg_version
+    try:
+        v = pkg_version("openfossil")
+    except Exception:
+        v = "dev"
+
+    click.echo("\033[38;5;208m" + r"""
+███████  ██████  ███████ ███████ ██ ██     
+██      ██    ██ ██      ██      ██ ██     
+█████   ██    ██ ███████ ███████ ██ ██     
+██      ██    ██      ██      ██ ██ ██     
+██       ██████  ███████ ███████ ██ ███████
+""" + "\033[0m")
+    click.echo("\033[38;5;240m  ────────────────────────────────────────────\033[0m")
+    click.echo("  semantic failure memory for AI agents")
+    click.echo(f"\033[38;5;240m  v{v}  ·  openfossil  ·  MIT  ·  fossil-api.hello-76a.workers.dev\033[0m")
+    click.echo()
 
 @click.group()
 @click.version_option(package_name="openfossil")
@@ -184,8 +202,7 @@ def list_cmd(
 
 @cli.command()
 @click.option("--api-url", envvar="FOSSIL_API_URL", default=None)
-@click.option("--db", default=None)
-def ping(api_url: Optional[str], db: Optional[str]) -> None:
+def ping(api_url: Optional[str], db: Optional[str] = None) -> None:
     """Check connection to FOSSIL store."""
     fossil = get_fossil(api_url, db)
     try:
@@ -198,3 +215,61 @@ def ping(api_url: Optional[str], db: Optional[str]) -> None:
     except Exception as e:
         click.echo(f"✗ Connection failed: {e}", err=True)
         sys.exit(1)
+
+
+@cli.command()
+@click.option("--db", default=None, help="Path to local SQLite DB")
+@click.option("--limit", default=20, show_default=True, help="Max fossils to pull from community pool")
+@click.option("--domain", default=None, help="Only pull fossils from this domain")
+@click.option("--force", is_flag=True, default=False, help="Re-seed even if store already has fossils")
+def init(
+    db: Optional[str],
+    limit: int,
+    domain: Optional[str],
+    force: bool,
+) -> None:
+    """Seed local store with fossils from the community pool."""
+    from .remote import RemoteStore
+    from .schema import TaskDomain as TD
+
+    local = Fossil(db_path=db or DEFAULT_DB)
+
+    if local.count() > 0 and not force:
+        click.echo(f"Store already has {local.count()} fossils. Use --force to re-seed.")
+        local.close()
+        return
+
+    _splash()
+    click.echo("Fetching community fossils...\n")
+
+    community = RemoteStore("https://fossil-api.hello-76a.workers.dev")
+    domain_enum = TD(domain) if domain else None
+
+    try:
+        results = community.search(
+            situation_text="agent reasoning failure",
+            top_k=limit,
+            min_score=0.0,
+            domain=domain_enum.value if domain_enum else None,
+            pool="community",
+        )
+    except Exception as e:
+        click.echo(f"✗ Failed to fetch from community pool: {e}", err=True)
+        local.close()
+        sys.exit(1)
+
+    if not results:
+        click.echo("No community fossils found.")
+        local.close()
+        return
+
+    seeded = 0
+    for record, _ in results:
+        existing = local.get(record.id)
+        if existing is None:
+            local.record_raw(record)
+            seeded += 1
+
+    local.close()
+    click.echo(f"✓ Seeded {seeded} fossil{'s' if seeded != 1 else ''} from community pool.")
+    click.echo(f"  Run 'fossil list' to see them.")
