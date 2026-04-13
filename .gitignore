@@ -17,6 +17,11 @@ pip-wheel-metadata/
 htmlcov/
 .coverage
 
+# Backup files
+backup.json
+fossils.json
+export*.json
+
 .wrangler/
 *.cast
 pnpm-lock.yaml
