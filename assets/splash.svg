@@ -1,0 +1,139 @@
+<svg width="100%" viewBox="47 34 474 127" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>FOSSIL splash art</title>
+  <desc>Trilobite logo on left scaled 1.618x, pixelated FOSSIL text on right, amber palette, transparent background</desc>
+
+  <!-- TRILOBITE — original 120x120, scaled 1.618x (194px), vertically centered in 220h → y_offset=13, x_offset=10 -->
+
+  <!-- Body segments -->
+  <rect x="81.2" y="38.9" width="51.8" height="12.9" fill="#c97b4b"/>
+  <rect x="68.2" y="51.8" width="77.6" height="12.9" fill="#c97b4b"/>
+  <rect x="61.8" y="64.7" width="90.6" height="12.9" fill="#c97b4b"/>
+  <rect x="87.6" y="51.8" width="38.8" height="12.9" fill="#e8955f"/>
+  <rect x="94.1" y="64.7" width="25.9" height="12.9" fill="#e8955f"/>
+
+  <rect x="68.2" y="77.7" width="77.6" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="77.7" width="25.9" height="9.7" fill="#e8955f"/>
+  <rect x="71.5" y="87.4" width="71.2" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="87.4" width="25.9" height="9.7" fill="#e8955f"/>
+  <rect x="74.7" y="97.1" width="64.7" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="97.1" width="25.9" height="9.7" fill="#e8955f"/>
+  <rect x="77.9" y="106.8" width="58.2" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="106.8" width="25.9" height="9.7" fill="#e8955f"/>
+  <rect x="81.2" y="116.5" width="51.8" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="116.5" width="25.9" height="9.7" fill="#e8955f"/>
+  <rect x="87.6" y="126.2" width="38.8" height="9.7" fill="#c97b4b"/>
+  <rect x="94.1" y="135.9" width="25.9" height="9.7" fill="#c97b4b"/>
+  <rect x="100.5" y="145.6" width="12.9" height="9.7" fill="#c97b4b"/>
+
+  <!-- Eyes -->
+  <rect x="74.7" y="58.3" width="9.7" height="9.7" fill="#5c3a1e"/>
+  <rect x="129.7" y="58.3" width="9.7" height="9.7" fill="#5c3a1e"/>
+
+  <!-- Left legs -->
+  <rect x="55.4" y="80.9" width="12.9" height="6.5" fill="#a06040"/>
+  <rect x="52.1" y="90.6" width="19.4" height="6.5" fill="#a06040"/>
+  <rect x="55.4" y="100.3" width="16.2" height="6.5" fill="#a06040"/>
+  <rect x="58.6" y="110.0" width="16.2" height="6.5" fill="#a06040"/>
+
+  <!-- Right legs -->
+  <rect x="145.8" y="80.9" width="12.9" height="6.5" fill="#a06040"/>
+  <rect x="142.6" y="90.6" width="19.4" height="6.5" fill="#a06040"/>
+  <rect x="142.6" y="100.3" width="16.2" height="6.5" fill="#a06040"/>
+  <rect x="139.3" y="110.0" width="16.2" height="6.5" fill="#a06040"/>
+
+  <!-- FOSSIL PIXEL TEXT -->
+  <!-- Pixel block: 8x8, step: 9px. Char step: 55px. y_start: 88 (centers 45px text in 220h) -->
+
+  <!-- F (x=215) -->
+  <rect x="215" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="224" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="233" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="242" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="251" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="215" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="215" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="224" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="233" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="242" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="215" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="215" y="124" width="8" height="8" fill="#e87722"/>
+
+  <!-- O (x=270) -->
+  <rect x="270" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="279" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="288" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="297" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="306" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="270" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="306" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="270" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="306" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="270" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="306" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="270" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="279" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="288" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="297" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="306" y="124" width="8" height="8" fill="#e87722"/>
+
+  <!-- S (x=325) -->
+  <rect x="325" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="334" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="343" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="352" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="361" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="325" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="325" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="334" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="343" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="352" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="361" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="361" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="325" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="334" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="343" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="352" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="361" y="124" width="8" height="8" fill="#e87722"/>
+
+  <!-- S (x=380) -->
+  <rect x="380" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="389" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="398" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="407" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="416" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="380" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="380" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="389" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="398" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="407" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="416" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="416" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="380" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="389" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="398" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="407" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="416" y="124" width="8" height="8" fill="#e87722"/>
+
+  <!-- I (x=435) -->
+  <rect x="435" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="444" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="453" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="444" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="444" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="444" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="435" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="444" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="453" y="124" width="8" height="8" fill="#e87722"/>
+
+  <!-- L (x=472) -->
+  <rect x="472" y="88" width="8" height="8" fill="#e87722"/>
+  <rect x="472" y="97" width="8" height="8" fill="#e87722"/>
+  <rect x="472" y="106" width="8" height="8" fill="#e87722"/>
+  <rect x="472" y="115" width="8" height="8" fill="#e87722"/>
+  <rect x="472" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="481" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="490" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="499" y="124" width="8" height="8" fill="#e87722"/>
+  <rect x="508" y="124" width="8" height="8" fill="#e87722"/>
+
+</svg>

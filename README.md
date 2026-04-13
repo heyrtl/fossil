@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="./assets/logo.svg" width="80" height="80" alt="FOSSIL trilobite logo" />
+  <img src="./assets/splash.svg" width="500" alt="FOSSIL" />
 </p>
-
-<h1 align="center">FOSSIL</h1>
 
 <p align="center">
   <strong>Semantic failure memory for AI agents.</strong>
@@ -16,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="./demo.gif" width="700" alt="FOSSIL demo" />
+  <img src="./assets/demo.gif" width="700" alt="FOSSIL demo" />
 </p>
 
 ---
