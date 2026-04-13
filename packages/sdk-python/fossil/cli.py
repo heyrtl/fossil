@@ -273,3 +273,41 @@ def init(
     local.close()
     click.echo(f"✓ Seeded {seeded} fossil{'s' if seeded != 1 else ''} from community pool.")
     click.echo(f"  Run 'fossil list' to see them.")
+
+@cli.command()
+@click.option("--api-url", envvar="FOSSIL_API_URL", default=None)
+@click.option("--db", default=None, help="Path to local SQLite DB")
+@click.option("--out", "-o", default=None, help="Output file path (default: stdout)")
+@click.option("--domain", default=None, help="Filter by task domain")
+@click.option("--shared-only", is_flag=True, default=False, help="Export only shared fossils")
+@click.option("--limit", default=1000, show_default=True, help="Max fossils to export")
+def export(
+    api_url: Optional[str],
+    db: Optional[str],
+    out: Optional[str],
+    domain: Optional[str],
+    shared_only: bool,
+    limit: int,
+) -> None:
+    """Export fossils to JSON."""
+    from .schema import TaskDomain as TD
+
+    fossil = get_fossil(api_url, db)
+    domain_enum = TD(domain) if domain else None
+
+    records = fossil.list(limit=limit, offset=0)
+    fossil.close()
+
+    if domain_enum:
+        records = [r for r in records if r.agent.task_domain == domain_enum]
+
+    if shared_only:
+        records = [r for r in records if r.shared]
+
+    data = json.dumps([r.to_dict() for r in records], indent=2)
+
+    if out:
+        Path(out).write_text(data)
+        click.echo(f"✓ Exported {len(records)} fossil{'s' if len(records) != 1 else ''} to {out}")
+    else:
+        click.echo(data)

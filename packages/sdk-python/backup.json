@@ -1,0 +1,191 @@
+[
+  {
+    "id": "fossil_85c3d01785b3",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T18:49:07.635090+00:00",
+    "agent": {
+      "framework": "custom",
+      "model": "claude-opus-4-5",
+      "task_domain": "file_management"
+    },
+    "situation": {
+      "description": "agent called delete_file tool on wrong path due to relative path confusion",
+      "context_snapshot": null
+    },
+    "failure": {
+      "type": "tool_misuse",
+      "description": "deleted config.json instead of temp/config.json \u2014 relative path resolved from wrong cwd",
+      "severity": "critical",
+      "was_irreversible": true
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "always use absolute paths in tool calls, never relative. inject cwd explicitly into prompt.",
+      "verified": true,
+      "time_to_resolve_minutes": null
+    },
+    "shared": true
+  },
+  {
+    "id": "fossil_8e2b74d25ae3",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T13:21:27.452Z",
+    "agent": {
+      "framework": "openclaw",
+      "model": "test-model",
+      "task_domain": "other"
+    },
+    "situation": {
+      "description": "shared test",
+      "context_snapshot": "SHARED_SECRET_VALUE=abc123def456"
+    },
+    "failure": {
+      "type": "misinterpretation",
+      "description": "test",
+      "severity": "minor",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "test",
+      "verified": false,
+      "time_to_resolve_minutes": null
+    },
+    "shared": true
+  },
+  {
+    "id": "fossil_1137a067df11",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T13:21:12.539Z",
+    "agent": {
+      "framework": "openclaw",
+      "model": "test-model",
+      "task_domain": "other"
+    },
+    "situation": {
+      "description": "test",
+      "context_snapshot": "SECRET_API_KEY=sk-1234567890abcdef PASSWORD=my-super-secret"
+    },
+    "failure": {
+      "type": "misinterpretation",
+      "description": "test",
+      "severity": "minor",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "test",
+      "verified": false,
+      "time_to_resolve_minutes": null
+    },
+    "shared": false
+  },
+  {
+    "id": "fossil_0861e67e349c",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T13:21:05.533Z",
+    "agent": {
+      "framework": "openclaw",
+      "model": "test-model",
+      "task_domain": "other"
+    },
+    "situation": {
+      "description": "test injection: \"; DROP TABLE fossils; --",
+      "context_snapshot": null
+    },
+    "failure": {
+      "type": "misinterpretation",
+      "description": "test",
+      "severity": "minor",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "test",
+      "verified": false,
+      "time_to_resolve_minutes": null
+    },
+    "shared": false
+  },
+  {
+    "id": "fossil_d2a0b5d067cd",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T13:20:17.274Z",
+    "agent": {
+      "framework": "openclaw",
+      "model": "claude-haiku-4-5",
+      "task_domain": "file_management"
+    },
+    "situation": {
+      "description": "testing sandbox execution",
+      "context_snapshot": null
+    },
+    "failure": {
+      "type": "misinterpretation",
+      "description": "test failure description",
+      "severity": "minor",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "adjusted the prompt",
+      "verified": true,
+      "time_to_resolve_minutes": null
+    },
+    "shared": false
+  },
+  {
+    "id": "fossil_6d212138bcba",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T12:58:00.721Z",
+    "agent": {
+      "framework": "langchain",
+      "model": "llama-3.3-70b-versatile",
+      "task_domain": "research"
+    },
+    "situation": {
+      "description": "agent stuck in infinite tool call loop on a search task",
+      "context_snapshot": null
+    },
+    "failure": {
+      "type": "infinite_loop",
+      "description": "agent kept calling search with same query, never satisfied with results",
+      "severity": "major",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "prompt_change",
+      "description": "added max_iterations=5 guard and explicit stop condition to prompt",
+      "verified": true,
+      "time_to_resolve_minutes": null
+    },
+    "shared": true
+  },
+  {
+    "id": "fossil_7b0b0ce1999a",
+    "protocol_version": "1.0",
+    "timestamp": "2026-04-12T02:32:56.323Z",
+    "agent": {
+      "framework": "langchain",
+      "model": "llama-3.3-70b-versatile",
+      "task_domain": "data_analysis"
+    },
+    "situation": {
+      "description": "agent extracting JSON from LLM output that returned markdown-fenced text",
+      "context_snapshot": null
+    },
+    "failure": {
+      "type": "format_failure",
+      "description": "json.loads failed because model wrapped output in ```json fences",
+      "severity": "major",
+      "was_irreversible": false
+    },
+    "resolution": {
+      "type": "input_sanitization",
+      "description": "strip markdown fences with regex before parsing",
+      "verified": true,
+      "time_to_resolve_minutes": null
+    },
+    "shared": false
+  }
+]
