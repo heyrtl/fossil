@@ -26,6 +26,7 @@ export*.json
 *.cast
 pnpm-lock.yaml
 pnpm-workspace.yaml
+package-lock.json
 
 # Node
 node_modules/
