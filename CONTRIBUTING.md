@@ -4,7 +4,7 @@ FOSSIL is an open protocol and open source implementation. Contributions are wel
 
 ---
 
-## 1. Bug reports
+## 1. [Bug reports](./.github/ISSUE_TEMPLATE/bug_report.md)
 
 Open an issue on GitHub. Include:
 
@@ -77,6 +77,6 @@ The protocol schema (`schema/fossil.v1.json`) and failure taxonomy are intention
 
 ---
 
-## Code of conduct
+## [Code of conduct](./CODE_OF_CONDUCT.md)
 
 Be direct. Be honest. Don't waste people's time.
