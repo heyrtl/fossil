@@ -58,7 +58,7 @@ Low-quality, fabricated, or adversarial fossils could degrade search quality for
 
 If you find a security issue in FOSSIL, please report it privately before disclosing publicly.
 
-Email: **ratul@touchplay.dev**
+Email: **hello@ratul-rahman.com**
 
 Include:
 - Description of the vulnerability
